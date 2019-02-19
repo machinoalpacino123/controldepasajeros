@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+
+
+	<div class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<div th:object="${Habitaciones}" th:remove="tag">
+					<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
+						role="alert">
+						<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+					</ul>
+				</div>
+
+				<form th:action="@{/crearnuevahabitacion}" th:object="${Habiciones}" method="post" enctype="multipart/form-data">
+					<div class="form-group row">
+						<label for="cantidadcamas" class="col-sm-2 col-form-label">Cantidad Camas</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{cantidadcamas}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('cantidadcamas')}" th:errors="*{cantidadcamas}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="fechaestadia" class="col-sm-2 col-form-label">Fechas Estadia</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{fechaestadia}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('fechaestadia')}" th:errors="*{fechaestadia}"></small>
+						</div>
+					</div>
+					
+					
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" th:value="${titulo}"
+								class="btn btn-secondary" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
+</body>
+</html>

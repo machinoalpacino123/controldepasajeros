@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta name="viewport" content="widht=device-width,user-scalable=no, initial-scale=1.0,maximun-scale=1.0,minimun-scale=1.0">
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	  <div class="contenedor" style= widht:80%;max-widht:1000px;margin:0;overflow:hidden;>
+		
+		<div class="card bg-light">
+		
+			<div class="card-header" th:text="${titulo}"></div>
+		
+			<div class="card-body">
+				
+					<a class="btn btn-success btn-xs"
+			th:href="@{'/arriendohabitacion/form/' + ${pasajero.id }}"
+			th:text="'crear arriendo habitacion'"></a>
+				<ul class="list-group">
+				
+					<li class="list-group-item" th:text="${pasajero.nombre}"></li>
+					<li class="list-group-item" th:text="${pasajero.apellido}"></li>
+					<li class="list-group-item" th:text="${pasajero.nacionalidad}"></li>
+					<li class="list-group-item" th:text="${pasajero.createAt}"></li>
+					<li class="list-group-item" th:text="${pasajero.foto}"></li>
+				</ul>
+
+				<div th:if="${#lists.isEmpty(pasajero.arriendohabitacion)}"
+					class="alert alert-info my-4"
+					th:text="'no hay arriendo asiganadas a este pasajero' +
+					 ' ' + ${pasajero.nombre} + ' '+ ${pasajero.apellido}"></div>
+				<table th:if="${not #lists.isEmpty(pasajero.arriendohabitacion)}"
+					class="table table-bordered table-spriped my-4">
+					<thead class="thead-inverse">
+						<tr>
+							<th>id</th>
+							<th>nhabitaciones</th>
+							<th>observaciones</th>
+							<th>fecha estadia</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="arriendohabitacion :${pasajero.arriendohabitacion}">
+							<td th:text="${arriendohabitacion.id}"></td>
+							<td th:text="${arriendohabitacion.nhabitaciones}"></td>
+							<td th:text="${arriendohabitacion.observacion}"></td>
+							<td th:text="${arriendohabitacion.createAt}"></td>
+						</tr>
+					</tbody>
+
+
+
+				</table>
+
+
+
+
+
+
+
+
+			</div>
+		</div>
+	
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

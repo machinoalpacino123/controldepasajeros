@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layout :: header"></header>
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<h4 class="card-title">
+					<a th:href="@{/form2}" class="btn btn-primary btn-xs"></a>
+				</h4>Crear Nuevo arrendatario
+				<table class="table table-striped table-bordered">
+					<thead class="thead-inverse">
+						<tr>
+							<th>id</th>
+							<th>nombre</th>
+							<th>email</th>
+							<th>ntelefono</th>							
+							<th>editar</th>
+							<th>eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="casa: ${casas}">
+
+							<td><a class="btn btn-primary btn-xs"
+								th:href="@{/crearnuevopasajero/} +${pasajero.id}" th:text="${pasajero.id}"></a></td>
+								
+                            <td th:text="${pasajero.nombre}"></td>
+							<td th:text="${pasajero.apellido}"></td>
+							<td th:text="${pasajero.nacionalidad}"></td>
+							<td th:text="${pasajero.fechaingreso}"></td>
+							<td th:text="${pasajero.fecharetirada}"></td>
+							
+							<td><a class="btn btn-primary btn-xs" 
+							th:href="@{/nuevopasajero/} + ${pasajero.id}" th:text="'editar'"></a></td>
+							<td><a class="btn btn-danger btn-xs"
+								th:href="@{/eliminarp/} + ${pasajero.id}" th:text="'eliminar'"
+								onclick="return confirm('¿deseas eliminar pasajero de la lista?');"></a></td>
+						</tr>
+					</tbody>
+
+				</table>
+				<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+
+
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
